@@ -1,20 +1,27 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ClientesService } from './clientes.service';
+import { FormsModule } from '@angular/forms';
+
 import { AltaClienteComponent } from './alta-cliente/alta-cliente.component';
-import {ListadoClientesComponent} from './listado-clientes/listado-clientes.component';
+import { ListadoClientesComponent } from './listado-clientes/listado-clientes.component';
+import { ClientesService } from './clientes.service';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+
+  ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    AltaClienteComponent,
+    ListadoClientesComponent
+  ],
   providers: [
     ClientesService
   ],
-  imports: [
-    CommonModule, FormsModule
-  ],
   exports: [
-    AltaClienteComponent, ListadoClientesComponent
+    AltaClienteComponent,
+    ListadoClientesComponent
   ]
 })
 export class ClientesModule { }

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Cliente, Grupo } from './clientes.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ClientesService {
   private clientes: Cliente[] = [];
   private grupos: Grupo[] = [];
@@ -28,7 +30,7 @@ export class ClientesService {
     this.clientes = [];
   }
 
-  getGrupos() {
+  getGrupos(): Grupo[] {
     return this.grupos;
   }
 

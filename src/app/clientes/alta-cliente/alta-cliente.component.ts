@@ -6,7 +6,6 @@ import {NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-alta-cliente',
-  providers: [ ClientesService ],
   imports: [
     FormsModule,
     NgForOf
