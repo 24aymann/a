@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Cliente, Grupo} from '../clientes.model';
-import { ClientesService } from '../clientes.service';
+import {Cliente} from '../clientes.model';
+import { ClientesService } from '../../services/clientes.service';
 import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
@@ -14,12 +14,17 @@ import {NgForOf, NgIf} from '@angular/common';
 })
 export class ListadoClientesComponent implements OnInit {
   clientes: Cliente[] = [];
-  grupos: Grupo[] = [];
 
   constructor(private clientesService: ClientesService) {}
 
   ngOnInit(): void {
-    this.clientes = this.clientesService.getClientes();
-    this.grupos = this.clientesService.getGrupos();
+    this.clientesService.getClientes().subscribe(clientes => {
+      this.clientes = clientes;
+    });
+  }
+
+  async onClickDelete(cliente: Cliente) {
+    const response = await this.clientesService.deleteCliente(cliente);
+    console.log(response);
   }
 }

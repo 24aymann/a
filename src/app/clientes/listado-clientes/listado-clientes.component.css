@@ -9,3 +9,17 @@ span {
   width: 22%;
   margin-right: 2%;
 }
+
+button {
+  width: 7rem;
+  height: 2rem;
+  color: white;
+  background-color: #E3292B;
+  border-radius: 5%;
+  margin: 0 10px;
+  transition: ease-in-out 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+}

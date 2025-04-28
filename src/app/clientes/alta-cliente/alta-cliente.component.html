@@ -1,22 +1,29 @@
 <h2>Alta cliente</h2>
-<p>
-  <span>Nombre:</span>
-  <input type="text" [(ngModel)]="cliente.nombre">
-</p>
-<p>
-  <span>CIF:</span>
-  <input type="text" [(ngModel)]="cliente.cif">
-</p>
-<p>
-  <span>Dirección:</span>
-  <input type="text" [(ngModel)]="cliente.direccion">
-</p>
-<p>
-  <span>Grupo:</span>
-  <select [(ngModel)]="cliente.grupo">
-    <option *ngFor="let grupo of grupos" value="{{grupo.id}}">{{grupo.nombre}}</option>
-  </select>
-</p>
-<p>
-  <button (click)="this.nuevoCliente()">Guardar</button>
-</p>
+
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" formControlName="nombre" type="text" />
+  </div>
+
+  <div>
+    <label for="cif">CIF:</label>
+    <input id="cif" formControlName="cif" type="text" />
+  </div>
+
+  <div>
+    <label for="direccion">Dirección:</label>
+    <input id="direccion" formControlName="direccion" type="text" />
+  </div>
+
+  <div>
+    <label for="grupo">Grupo:</label>
+    <select id="grupo" formControlName="grupo">
+      <option *ngFor="let grupo of grupos" [value]="grupo.id">
+        {{ grupo.nombre }}
+      </option>
+    </select>
+  </div>
+
+  <button type="submit">Agregar Cliente</button>
+</form>

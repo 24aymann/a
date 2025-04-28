@@ -1,14 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import { ClientesService } from '../clientes.service';
+import { ClientesService } from '../../services/clientes.service';
 import { Cliente, Grupo } from '../clientes.model';
-import {FormsModule} from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {NgForOf} from '@angular/common';
+import {GruposService} from '../../services/grupos.service';
 
 @Component({
   selector: 'app-alta-cliente',
   imports: [
     FormsModule,
-    NgForOf
+    NgForOf,
+    ReactiveFormsModule
   ],
   templateUrl: './alta-cliente.component.html',
   styleUrl: './alta-cliente.component.css'
@@ -17,15 +19,24 @@ export class AltaClienteComponent implements OnInit {
   cliente: Cliente = {} as Cliente;
   grupos: Grupo[] = [];
 
-  constructor(private clientesService: ClientesService) {}
+  formulario: FormGroup;
 
-  ngOnInit() {
-    this.cliente = this.clientesService.nuevoCliente();
-    this.grupos = this.clientesService.getGrupos();
+  constructor(private clientesService: ClientesService, private gruposService: GruposService) {
+    this.formulario = new FormGroup({
+      nombre: new FormControl(),
+      cif: new FormControl(),
+      direccion: new FormControl(),
+      grupo: new FormControl(),
+    })
   }
 
-  nuevoCliente(): void {
-    this.clientesService.addClientes(this.cliente);
-    this.cliente = this.clientesService.nuevoCliente();
+  ngOnInit() {
+    this.grupos = this.gruposService.getGrupos();
+  }
+
+  async onSubmit() {
+    console.log(this.formulario.value);
+    const response = await this.clientesService.addCliente(this.formulario.value);
+    console.log(response);
   }
 }
